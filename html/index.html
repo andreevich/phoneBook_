@@ -1,0 +1,133 @@
+﻿<!doctype html>
+<html lang="en" data-framework="backbonejs">
+	<head>
+		<meta charset="utf-8">
+		<title>АСУС - САПОД</title>
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+		
+	</head>
+	<body style="padding: 10px;">
+	<style>
+		tr{
+			cursor:pointer;
+		}	
+	</style>	
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">А-С</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Станция <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu" id="menu">
+				<!-- Программно формирую список станций (app.MenuView) -->
+			</ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" size=15 placeholder="Станция" id='st' disabled >
+          <input type="text" class="form-control datapic" size=5   placeholder="дата1" id="date1" >
+          <input type="text" class="form-control datapic" size=5   placeholder="дата1" id="date2" >
+          <input type="text" class="form-control" size=10 placeholder="№вагона" id="nv">
+        </div>
+        <button type="submit" class="btn btn-default" id='search'>Поиск</button>
+      </form>
+    </div>
+	</div>
+</nav>
+	<div class="row">
+		<div class="col-md-3"  style="height: 650px; overflow-y: scroll;">
+			<span id="loading">Загрузка данных...</span>
+			<table  class="table table-bordered table-condensed"  id="table1">
+				<!-- Программно формирую список операций (app.OperView_1) -->
+			</table>
+	
+		</div>
+		<div class="col-md-9">
+			<table  class="table table-bordered table-condensed"  id="table2">
+				<!-- Программно формирую список операций (app.OperItemView_2) -->
+			</table>
+		</div>
+	</div>	
+		
+		
+		<!-- Шаблон для элемента строки в меню выбора станции -->
+		<script type="text/template" id="item-template">
+			<% if (name!="-") { %>
+				<a ><%=name%></a> <!-- href='#<%=esr%>' -->
+			<%} else %>
+				<li class="divider"></li>
+		</script>	
+	
+		<!-- Шаблон для элемента строки в меню выбора станции -->
+		<script type="text/template" id="item-template-oper_1">
+			<% if (error==null) { %>
+				<td><%=istoch_data%></td><td><%=id_oper%></td><td><%=typeOper%></td><td><%=date_ins%></td>
+			<%} else {%>
+				<td><%=istoch_data%></td><td><%=id_oper%></td><td ><%=typeOper%><sup><%=error%></sup></td><td><%=date_ins%></td>
+			<%}%>
+		</script>	
+		<!-- Шаблон для элемента строки в меню выбора станции -->
+		<script type="text/template" id="item-template-oper_2">
+				<tbody>
+				<tr><th>1</th></tr>
+				<tr>
+					<td><%=istoch_data%></td>
+					<td><%=id_oper%></td>
+					<td ><%=typeOper%></td>
+					<td><%=error%></td>
+					<td><%=date_ins%></td>
+					<td><%=kodStan%></td>
+					<td><%=kod_pol_per%></td>
+					<td><%=kod_stn_per%></td>
+					<td><%=n_vag_error%></td>
+					<td><%=num_train%></td>
+					<td><%=park%></td>
+					<td><%=put%></td>
+					<td><%=pr_end%></td>
+					<td><%=typeOper%></td>
+				</tr>
+				</tbody>
+		</script>
+		
+		
+		<script src="node_modules/underscore/underscore.js"></script>
+		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<script src="node_modules/backbone/backbone.js"></script>
+		
+		<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+		<script src="node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ru.min.js"></script>
+		
+		<script src="./js/models/search.js"></script>
+		<script src="./js/models/menuStation.js"></script>
+		<script src="./js/models/typeOper.js"></script>
+		
+		<script src="./js/collections/menuStations.js"></script>
+		
+		
+		<script src="./js/views/menuItem.js"></script>
+		<script src="./js/views/menu.js"></script>
+		<script src="./js/views/oper_1.js"></script>
+		<script src="./js/views/oper_2.js"></script>
+		<script src="./js/views/operItem_1.js"></script>
+
+
+		<script src="./js/collections/typeOpers.js"></script>
+		
+	<!--	<script src="./js/routers/router.js"></script> -->
+		<script src="./js/main.js"></script>
+		
+	</body>
+</html>
